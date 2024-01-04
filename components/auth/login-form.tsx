@@ -10,6 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { useSearchParams } from 'next/navigation';
 import { CardWrapper } from './card-wrapper';
 import * as z from 'zod';
 import { LoginSchema } from '@/schemas';
@@ -21,6 +22,11 @@ import { useState, useTransition } from 'react';
 import { login } from '@/actions/login';
 
 export const LoginForm = () => {
+  const searchParams = useSearchParams();
+  const urlError =
+    searchParams.get('error') === 'OAuthAccountNotLinked'
+      ? 'Email already in use with another provider.'
+      : '';
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
 
@@ -93,7 +99,7 @@ export const LoginForm = () => {
               )}
             />
           </div>
-          <FormError message={error} />
+          <FormError message={error || urlError} />
           <FormSuccess message={success} />
           <Button type='submit' className='w-full' disabled={isPending}>
             Login

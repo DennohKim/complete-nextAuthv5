@@ -6,6 +6,7 @@
 
 export const publicRoutes = [
 	"/",
+
 ]
 
 /**
@@ -14,7 +15,7 @@ export const publicRoutes = [
  * @type {string[]}
  */
 
-export const authRoutes = ['/auth/login', '/auth/register'];
+export const authRoutes = ['/auth/login', '/auth/register', '/auth/error'];
 
 
 /**
