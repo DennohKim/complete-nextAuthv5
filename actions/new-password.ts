@@ -9,7 +9,7 @@ import { db } from '@/lib/db';
 
 export const newPassword = async (
   values: z.infer<typeof NewPasswordSchema>,
-  token: string | null
+  token?: string | null
 ) => {
   if (!token) {
     return {
@@ -27,6 +27,7 @@ export const newPassword = async (
 
   const { password } = validatedFields.data;
 
+  console.log('token:', token)
   const existingToken = await getPasswordResetTokenByToken(token);
   console.log(existingToken)
 
